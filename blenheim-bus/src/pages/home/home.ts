@@ -18,4 +18,8 @@ export class HomePage {
     return moment().format("HH:MM");
   }
 
+  getStop(): string[] {
+    return "Seymour St at Countdown".split(" at ");
+  }
+
 }

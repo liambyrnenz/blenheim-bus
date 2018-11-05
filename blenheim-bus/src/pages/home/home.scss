@@ -4,23 +4,46 @@ page-home {
     color: white;
   }
 
+  .bigger {
+    font-size: 24px;
+  }
+
+  .biggest {
+    font-size: 32px;
+  }
+
   .blue-bg {
     background-color: map-get($colors, primary);
   }
 
-  .info {
+  .bold {
     font-weight: bold;
+  }
+
+  .faded {
     opacity: 0.75;
+  }
+
+  .no-margin {
+    margin: 0;
   }
 
   .padded {
     padding: 2em;
   }
 
+  .padded-top-only {
+    padding-top: 2em;
+  }
+
+  .route-line {
+    letter-spacing: 1.5px;
+    text-align: center;
+  }
+
   .time {
     font-size: 144px;
-    font-weight: bold;
-    margin: 0;
+    line-height: 1;
   }
 
 }

@@ -1,11 +1,26 @@
 <ion-content class="blue-bg">
-  <!-- {{ getTime() }} -->
-  <div class="padded">
-    <div class="time">
-      3
+  <div class="padded-top-only">
+    <div class="bold faded route-line">
+      REDWOODTOWN
+    </div>
+    <div class="bold faded route-line">
+      WITHERLEA
     </div>
   </div>
-  <div class="padded info">
+  <div class="padded">
+    <div class="no-margin bold time">
+      3
+    </div>
+    <div class="no-margin bold bigger text">minutes</div>
+    <div class="no-margin bold bigger faded text">from</div>
+    <div class="no-margin bold biggest text">
+      {{ getStop()[0] }}
+    </div>
+    <div class="no-margin bold biggest text">
+      <span class="faded">at </span>{{ getStop()[1] }}
+    </div>
+  </div>
+  <div class="padded bold faded">
     Adults: $2.00<br />
     Children and Students: $1.00<br />
     SuperGold and Children under 5: Free
