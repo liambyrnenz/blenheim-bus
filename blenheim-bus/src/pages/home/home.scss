@@ -46,4 +46,12 @@ page-home {
     line-height: 1;
   }
 
+  @media screen and (min-width: 480px) {
+    
+    * {
+      text-align: center;
+    }
+
+  }
+
 }
