@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { LocalDatabaseProvider } from '../../providers/local-database/local-database';
 
 import moment from 'moment';
@@ -10,9 +9,7 @@ import moment from 'moment';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private database: LocalDatabaseProvider) {
-
-  }
+  constructor(private database: LocalDatabaseProvider) {}
 
   getTime() {
     return moment().format("HH:MM");

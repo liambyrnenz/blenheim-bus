@@ -97,7 +97,10 @@ export class LocalDatabaseProvider {
    * @param day today (to determine if the bus is running)
    */
   getNextStop(time: string, day: string) {
-
+    this.storage.get(time).then(r => {
+      if (r) return r;
+      
+    });
   }
 
   /**
