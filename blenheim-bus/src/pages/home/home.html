@@ -1,28 +1,51 @@
 <ion-content class="blue-bg">
-  <div class="padded-top-only">
-    <div class="bold faded route-line">
-      REDWOODTOWN
-    </div>
-    <div class="bold faded route-line">
-      WITHERLEA
+
+  <!-- Debug info -->
+  {{ getTime() }}
+  {{ getDay() }}
+
+  <!-- Line information: can be used for status info too -->
+  <div class="padded-top-only animated fadeInDown delay-1s">
+    <div *ngFor="let line of database.getRoute(getTime(), getDay())" class="bold faded route-line">
+      {{ line }}
     </div>
   </div>
+
   <div class="padded">
-    <div class="no-margin bold time">
-      3
+
+    <!-- Bus is in service -->
+    <div *ngIf="database.isInService(getTime(), getDay())">
+      <div class="no-margin bold time animated flipInX">
+        3
+      </div>
+      <div class="no-margin bold bigger text">minutes</div>
+      <div class="no-margin bold bigger faded text">from</div>
+      <div class="no-margin bold biggest text">
+        {{ getStop()[0] }}
+      </div>
+      <div *ngFor="let line of getStop().slice(1)" class="no-margin bold biggest text">
+        <span class="faded">at </span>{{ line }}
+      </div>
     </div>
-    <div class="no-margin bold bigger text">minutes</div>
-    <div class="no-margin bold bigger faded text">from</div>
-    <div class="no-margin bold biggest text">
-      {{ getStop()[0] }}
-    </div>
-    <div class="no-margin bold biggest text">
-      <span class="faded">at </span>{{ getStop()[1] }}
+
+    <!-- Bus is not in service -->
+    <div *ngIf="!database.isInService(getTime(), getDay())">
+      <div class="no-margin bold biggest text">
+        The bus is <br />
+        not in service <br />
+        right now.
+      </div>
+      <div class="no-margin bold biggest faded text">
+        Try again later. <!-- TODO try again in... -->
+      </div>
     </div>
   </div>
+
+  <!-- Static information -->
   <div class="padded bold faded">
     Adults: $2.00<br />
     Children and Students: $1.00<br />
     SuperGold and Children under 5: Free
   </div>
+  
 </ion-content>

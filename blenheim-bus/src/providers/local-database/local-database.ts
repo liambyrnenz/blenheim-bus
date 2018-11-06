@@ -93,7 +93,7 @@ export class LocalDatabaseProvider {
   /**
    * Determine the next stop the bus will reach. If the time matches exactly one in the
    * database, simply get that stop. Otherwise, figure out the next one it will reach.
-   * @param time time in string form HH:MM
+   * @param time time in string form HH:mm
    * @param day today (to determine if the bus is running)
    */
   getNextStop(time: string, day: string) {
@@ -105,13 +105,29 @@ export class LocalDatabaseProvider {
 
   /**
    * Determine the route the bus is on now from the given time.
-   * @param time time in string form HH:MM
+   * @param time time in string form HH:mm
+   * @param day today (to determine if the bus is running)
    * @returns formatted route string in array form such that each line can be printed
    * separate
    */
-  getRoute(time: string) {
-    let mm = time.split(":")[1];
-    return Number(mm) < 30 ? ["REDWOODTOWN", "WITHERLEA"] : ["SPRINGLANDS", "RIVERSDALE"];
+  getRoute(time: string, day: string) {
+    if (!this.isInService(time, day)) return ["NOT IN SERVICE"];
+    let mm = Number(time.split(":")[1]);
+    return mm < 30 ? ["REDWOODTOWN", "WITHERLEA"] : ["SPRINGLANDS", "RIVERSDALE"];
+  }
+
+  /**
+   * Check if the bus is in service on a particular day and time.
+   * Method assumes bus does not run on a Sunday, only runs on Saturday in the morning
+   * and between START_TIME and END_TIME any other day. TODO holidays?
+   * @param time time in string form HH:mm
+   * @param day day in form Monday, Tuesday, etc.
+   */
+  isInService(time: string, day: string) {
+    let hh = Number(time.split(":")[0]);
+    if (day === "Sunday") return false;
+    if (day === "Saturday" && (hh < this.START_TIME || hh >= 12)) return false;
+    return hh >= this.START_TIME && hh < this.END_TIME;
   }
 
 }

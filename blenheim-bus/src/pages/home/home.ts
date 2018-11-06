@@ -9,10 +9,16 @@ import moment from 'moment';
 })
 export class HomePage {
 
-  constructor(private database: LocalDatabaseProvider) {}
+  constructor(private database: LocalDatabaseProvider) {
+    setInterval(() => this.getTime(), 10000);
+  }
+
+  getDay() {
+    return moment().format("dddd");
+  }
 
   getTime() {
-    return moment().format("HH:MM");
+    return moment().format("HH:mm");
   }
 
   getStop(): string[] {
