@@ -13,8 +13,6 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class LocalDatabaseProvider {
 
-  // TODO: No Sunday service and no Saturday afternoon (1 and 2)
-
   // min/max start and end times respectively in 24 hour time
   readonly START_TIME = 9;
   readonly END_TIME = 15;
@@ -126,7 +124,7 @@ export class LocalDatabaseProvider {
   isInService(time: string, day: string) {
     let hh = Number(time.split(":")[0]);
     if (day === "Sunday") return false;
-    if (day === "Saturday" && (hh < this.START_TIME || hh >= 12)) return false;
+    if (day === "Saturday" && (hh < this.START_TIME || hh >= 13)) return false;
     return hh >= this.START_TIME && hh < this.END_TIME;
   }
 

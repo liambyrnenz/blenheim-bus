@@ -18,13 +18,19 @@
       <div class="no-margin bold time animated flipInX">
         3
       </div>
-      <div class="no-margin bold bigger text">minutes</div>
-      <div class="no-margin bold bigger faded text">from</div>
+      <div class="no-margin bold bigger text">
+        minutes
+        <!-- {{ condition == 1 ? "minute" : "minutes" }} -->
+      </div>
+      <div class="no-margin bold bigger faded text">
+        from
+        <!-- {{ condition == Due ? "from" : "at" }} -->
+      </div>
       <div class="no-margin bold biggest text">
         {{ getStop()[0] }}
       </div>
-      <div *ngFor="let line of getStop().slice(1)" class="no-margin bold biggest text">
-        <span class="faded">at </span>{{ line }}
+      <div *ngIf="getStop().length == 2" class="no-margin bold biggest text">
+        <span class="faded">at </span>{{ getStop()[1] }}
       </div>
     </div>
 
