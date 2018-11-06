@@ -12,30 +12,50 @@ import moment from 'moment';
 })
 export class HomePage {
 
+  time: string = this.getTime();
   timeAway: string = "Due";
+  currentStop: string[] = [];
 
   constructor(private database: LocalDatabaseProvider) {
-    setInterval(() => this.getTime(), 10000);
+    this.doUpdates();
+    
+    setInterval(() => {
+      let t = this.getTime();
+      if (this.time != t) {
+        this.time = t;
+        this.doUpdates();
+      }
+    }, 1000);
   }
 
-  get currentStop() {
-    return this.database.getNextStop(this.getTime()).split(" at ");
-  }
+  /* =========================== TEMPLATE GETTERS ========================= */
 
   get currentRoute() {
-    return this.database.getRoute(this.getTime(), this.getDay());
+    return this.database.getRoute(this.time, this.getDay());
   }
 
   get isInService() {
-    return this.database.isInService(this.getTime(), this.getDay());
+    return this.database.isInService(this.time, this.getDay());
   }
+
+  /* ========================== INTERNAL GETTERS ========================== */
 
   getDay() {
     return moment().format("dddd");
   }
 
+  getStop() {
+    return this.database.getNextStop(this.time).split(" at ");
+  }
+
   getTime() {
     return moment().format("HH:mm");
+  }
+
+  /* ====================================================================== */
+
+  doUpdates() {
+    this.currentStop = this.getStop();
   }
 
 }
