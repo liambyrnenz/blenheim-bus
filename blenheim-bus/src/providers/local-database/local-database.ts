@@ -92,13 +92,15 @@ export class LocalDatabaseProvider {
    * Determine the next stop the bus will reach. If the time matches exactly one in the
    * database, simply get that stop. Otherwise, figure out the next one it will reach.
    * @param time time in string form HH:mm
-   * @param day today (to determine if the bus is running)
    */
-  getNextStop(time: string, day: string) {
+  getNextStop(time: string): string {
+    let stop = "Loading...";
+    console.log("Getting next stop..."); // TODO infinite loop
     this.storage.get(time).then(r => {
-      if (r) return r;
-      
+      if (r) stop = r;
+      //
     });
+    return stop;
   }
 
   /**

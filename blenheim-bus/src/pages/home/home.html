@@ -27,7 +27,7 @@
         <!-- {{ condition == Due ? "from" : "at" }} -->
       </div>
       <div class="no-margin bold biggest text">
-        {{ getStop()[0] }}
+        {{ getStop()[0] }} <!-- must be at least one stop line and at most two -->
       </div>
       <div *ngIf="getStop().length == 2" class="no-margin bold biggest text">
         <span class="faded">at </span>{{ getStop()[1] }}

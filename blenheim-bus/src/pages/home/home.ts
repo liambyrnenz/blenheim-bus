@@ -10,7 +10,7 @@ import moment from 'moment';
 export class HomePage {
 
   constructor(private database: LocalDatabaseProvider) {
-    setInterval(() => this.getTime(), 10000);
+    // setInterval(() => this.getTime(), 10000);
   }
 
   getDay() {
@@ -22,7 +22,7 @@ export class HomePage {
   }
 
   getStop(): string[] {
-    return "Seymour St at Countdown".split(" at ");
+    return this.database.getNextStop(this.getTime()).split(" at ");
   }
 
 }
