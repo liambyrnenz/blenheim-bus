@@ -96,10 +96,10 @@ export class LocalDatabaseProvider {
   getNextStop(time: string): string {
     let stop = "Loading...";
     console.log("Getting next stop..."); // TODO infinite loop
-    this.storage.get(time).then(r => {
-      if (r) stop = r;
-      //
-    });
+    // this.storage.get(time).then(r => {
+    //   if (r) stop = r;
+    //   //
+    // });
     return stop;
   }
 

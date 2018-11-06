@@ -1,12 +1,8 @@
 <ion-content class="blue-bg">
 
-  <!-- Debug info -->
-  {{ getTime() }}
-  {{ getDay() }}
-
   <!-- Line information: can be used for status info too -->
   <div class="padded-top-only animated fadeInDown delay-1s">
-    <div *ngFor="let line of database.getRoute(getTime(), getDay())" class="bold faded route-line">
+    <div *ngFor="let line of currentRoute" class="bold faded route-line">
       {{ line }}
     </div>
   </div>
@@ -14,28 +10,26 @@
   <div class="padded">
 
     <!-- Bus is in service -->
-    <div *ngIf="database.isInService(getTime(), getDay())">
-      <div class="no-margin bold time animated flipInX">
-        3
+    <div *ngIf="isInService">
+      <div class="no-margin bold animated flipInX" [class.time]="timeAway !== 'Due'" [class.due]="timeAway === 'Due'">
+        {{ timeAway }}
       </div>
-      <div class="no-margin bold bigger text">
-        minutes
-        <!-- {{ condition == 1 ? "minute" : "minutes" }} -->
+      <div *ngIf="timeAway !== 'Due'" class="no-margin bold bigger text">
+        {{ timeAway === "1" ? "minute" : "minutes" }}
       </div>
       <div class="no-margin bold bigger faded text">
-        from
-        <!-- {{ condition == Due ? "from" : "at" }} -->
+        {{ timeAway === "Due" ? "at" : "from" }}
       </div>
       <div class="no-margin bold biggest text">
-        {{ getStop()[0] }} <!-- must be at least one stop line and at most two -->
+        {{ currentStop[0] }} <!-- must be at least one stop line and at most two -->
       </div>
-      <div *ngIf="getStop().length == 2" class="no-margin bold biggest text">
-        <span class="faded">at </span>{{ getStop()[1] }}
+      <div *ngIf="currentStop.length == 2" class="no-margin bold biggest text">
+        <span class="faded">at </span>{{ currentStop[1] }}
       </div>
     </div>
 
     <!-- Bus is not in service -->
-    <div *ngIf="!database.isInService(getTime(), getDay())">
+    <div *ngIf="!isInService">
       <div class="no-margin bold biggest text">
         The bus is <br />
         not in service <br />
