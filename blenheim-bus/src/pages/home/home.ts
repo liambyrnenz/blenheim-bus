@@ -18,7 +18,7 @@ export class HomePage {
 
   constructor(private database: LocalDatabaseProvider) {
     this.doUpdates();
-    
+
     setInterval(() => {
       let t = this.getTime();
       if (this.time != t) {
@@ -44,10 +44,6 @@ export class HomePage {
     return moment().format("dddd");
   }
 
-  getStop() {
-    return this.database.getNextStop(this.time).split(" at ");
-  }
-
   getTime() {
     return moment().format("HH:mm");
   }
@@ -55,7 +51,9 @@ export class HomePage {
   /* ====================================================================== */
 
   doUpdates() {
-    this.currentStop = this.getStop();
+    this.database.getNextStop(this.time).then(r => {
+      this.currentStop = r.split(" at ");
+    });
   }
 
 }

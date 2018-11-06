@@ -93,14 +93,13 @@ export class LocalDatabaseProvider {
    * database, simply get that stop. Otherwise, figure out the next one it will reach.
    * @param time time in string form HH:mm
    */
-  getNextStop(time: string): string {
-    let stop = "Loading...";
-    console.log("Getting next stop..."); // TODO infinite loop
-    // this.storage.get(time).then(r => {
-    //   if (r) stop = r;
-    //   //
-    // });
-    return stop;
+  getNextStop(time: string) {
+    let mm = ":" + time.split(":")[1];
+    console.log(mm);
+    if (this.INTERVALS.indexOf(mm) > -1) {
+      return this.storage.get(time);
+    }
+    return new Promise(resolve => resolve("N/A"));
   }
 
   /**
