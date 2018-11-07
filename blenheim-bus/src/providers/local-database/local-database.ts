@@ -20,12 +20,13 @@ export class LocalDatabaseProvider {
   readonly END_TIME = 15;
 
   // all intervals of the hour that the bus is at a stop
+  // store here so we don't have to deal with async just to search times
   readonly INTERVALS = [":00", ":01", ":02", ":05", ":06", ":08", ":09",
-                        ":10", ":11", ":12", ":13", ":14", ":15", ":16", ":17", ":18",
-                        ":20", ":22", ":23", ":25", ":26", ":27", ":29",
-                        ":30", ":31", ":32", ":34", ":35", ":37", ":39",
-                        ":40", ":41", ":42", ":43", ":44", ":46", ":47", ":48",
-                        ":53", ":54", ":55", ":57", ":59"];
+    ":10", ":11", ":12", ":13", ":14", ":15", ":16", ":17", ":18",
+    ":20", ":22", ":23", ":25", ":26", ":27", ":29",
+    ":30", ":31", ":32", ":34", ":35", ":37", ":39",
+    ":40", ":41", ":42", ":43", ":44", ":46", ":47", ":48",
+    ":53", ":54", ":55", ":57", ":59"];
 
   constructor(private storage: Storage) {
     storage.length().then(r => {
@@ -94,17 +95,31 @@ export class LocalDatabaseProvider {
    * Determine the next stop the bus will reach. If the time matches exactly one in the
    * database, simply get that stop. Otherwise, figure out the next one it will reach.
    * @param time time in string form HH:mm
+   * @param last time in string form HH:mm of last stop the bus passed
    */
   getNextStop(time: string) {
     let mm = ":" + time.split(":")[1];
-    console.log(mm);
-    if (this.INTERVALS.indexOf(mm) > -1) {
-      return this.storage.get(time);
-    } 
-    // else {
 
-    // }
-    return new Promise(resolve => resolve("N/A"));
+    // first, try to see if this time has an exact stop match
+    if (this.INTERVALS.indexOf(mm) > -1) {
+      return {time: time, stop: this.storage.get(time)};
+    }
+
+    // otherwise, calculate by inserting the time into a copy of the intervals array,
+    // sorting it and getting the next time
+    let ints = this.INTERVALS.slice();
+    ints.push(mm);
+    ints = ints.sort();
+
+    let idx = ints.indexOf(mm) + 1;
+    if (idx === ints.length - 1) idx = 0;
+    let next = time.split(":")[0] + ints[idx];
+    if (idx === 0) {
+      let hh1 = (Number(next.split(":")[0]) + 1) + "";
+      if (hh1.length == 1) hh1 = "0" + hh1;
+      next = hh1 + mm;
+    }
+    return {time: next, stop: this.storage.get(next)};
   }
 
   /**

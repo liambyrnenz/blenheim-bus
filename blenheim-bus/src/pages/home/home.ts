@@ -66,8 +66,12 @@ export class HomePage {
 
   doUpdates() {
     if (!this.isInService) return;
-    this.database.getNextStop(this.time).then(r => {
+    let ns = this.database.getNextStop(this.time);
+    ns.stop.then(r => {
       this.currentStop = r.split(" at ");
+      let next = moment(ns.time, "HH:mm");
+      let diff = next.diff(moment(this.time, "HH:mm"), "minutes");
+      this.timeAway = diff == 0 ? "Due" : diff + "";
     });
   }
 
@@ -75,9 +79,9 @@ export class HomePage {
     this.alert.create({
       title: "About",
       subTitle: "This app was created by Liam Byrne." +
-                "<br/><br/>" + 
-                "<a href='https://liambyrne.nz'>liambyrne.nz</a><br/>" +
-                "@liambyrnenz",
+        "<br/><br/>" +
+        "<a href='https://liambyrne.nz'>liambyrne.nz</a><br/>" +
+        "@liambyrnenz",
       buttons: ['Back']
     }).present();
   }
