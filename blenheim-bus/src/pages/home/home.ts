@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LocalDatabaseProvider } from '../../providers/local-database/local-database';
 
 import moment from 'moment';
+import { AlertController } from 'ionic-angular';
 
 /**
  * The sole page for the app.
@@ -16,7 +17,7 @@ export class HomePage {
   timeAway: string = "Due";       // time from next stop
   currentStop: string[] = [];     // current stop (array for multiple lines)
 
-  constructor(private database: LocalDatabaseProvider) {
+  constructor(private alert: AlertController, private database: LocalDatabaseProvider) {
     // call updates instantly
     this.doUpdates();
 
@@ -68,6 +69,17 @@ export class HomePage {
     this.database.getNextStop(this.time).then(r => {
       this.currentStop = r.split(" at ");
     });
+  }
+
+  showAboutAlert() {
+    this.alert.create({
+      title: "About",
+      subTitle: "This app was created by Liam Byrne." +
+                "<br/><br/>" + 
+                "<a href='https://liambyrne.nz'>liambyrne.nz</a><br/>" +
+                "@liambyrnenz",
+      buttons: ['Back']
+    }).present();
   }
 
 }

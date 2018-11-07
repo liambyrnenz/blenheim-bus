@@ -1,7 +1,7 @@
 page-home {
 
   * {
-    color: white;
+    color: map-get($colors, light);
   }
 
   .bigger {
@@ -37,7 +37,15 @@ page-home {
     padding: 2em;
   }
 
-  .padded-top-only {
+  .padded-left {
+    padding-left: 2em;
+  }
+
+  .padded-right {
+    padding-right: 2em;
+  }
+
+  .padded-top {
     padding-top: 2em;
   }
 

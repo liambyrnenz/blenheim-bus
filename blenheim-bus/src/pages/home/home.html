@@ -1,7 +1,7 @@
 <ion-content class="blue-bg">
 
   <!-- Line information: can be used for status info too -->
-  <div class="padded-top-only animated fadeInDown delay-1s">
+  <div class="padded-top animated fadeInDown delay-1s">
     <div *ngFor="let line of currentRoute" class="bold faded route-line">
       {{ line }}
     </div>
@@ -21,7 +21,8 @@
         {{ timeAway === "Due" ? "at" : "from" }}
       </div>
       <div class="no-margin bold biggest text animated fadeInLeft">
-        {{ currentStop[0] }} <!-- must be at least one stop line and at most two -->
+        {{ currentStop[0] }}
+        <!-- must be at least one stop line and at most two -->
       </div>
       <div *ngIf="currentStop.length == 2" class="no-margin bold biggest text animated fadeInLeft">
         <span class="faded">at </span>{{ currentStop[1] }}
@@ -36,18 +37,24 @@
         right now.
       </div>
       <div class="no-margin bold biggest faded text">
-        Try again at {{ getDay() === "Saturday" ? 
-        getConvertedTime(database.START_TIME + ":00") + " on Monday" : 
-        getConvertedTime(database.START_TIME + ":00") + " tomorrow" }}.
+        Try again at <br />
+        {{ getDay() === "Saturday" ?
+        getConvertedTime(database.START_TIME + ":00") + " on Monday" :
+        getConvertedTime(database.START_TIME + ":00") + "" }}.
       </div>
     </div>
   </div>
 
   <!-- Static information -->
-  <div class="padded bold faded">
+  <div class="padded-top padded-left padded-right bold faded">
     Adults: $2.00<br />
     Children and Students: $1.00<br />
     SuperGold and Children under 5: Free
   </div>
-  
+  <div class="no-margin padded faded">
+    <button ion-button outline small color="light" (click)="showAboutAlert()">
+      About
+    </button>
+  </div>
+
 </ion-content>

@@ -35,10 +35,10 @@ $app-direction: ltr;
 
 $colors: (
   primary:    #00a2ff,
-  secondary:  #32db64,
+  secondary:  #0032bd,
   danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  light:      #ffffff,
+  dark:       #000000
 );
 
 
@@ -46,14 +46,15 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
+// $alert-ios-background: map-get($map: $colors, $key: primary);
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
+// $alert-md-background-color: map-get($colors, primary);
+// $alert-md-message-text-color: map-get($colors, light);
 
 
 // App Windows Variables
