@@ -11,7 +11,7 @@
 
     <!-- Bus is in service -->
     <div *ngIf="isInService">
-      <div class="no-margin bold animated flipInX" [class.time]="timeAway !== 'Due'" [class.due]="timeAway === 'Due'">
+      <div class="bold bump-left animated flipInX" [class.time]="timeAway !== 'Due'" [class.due]="timeAway === 'Due'">
         {{ timeAway }}
       </div>
       <div *ngIf="timeAway !== 'Due'" class="no-margin bold bigger text">
@@ -26,6 +26,9 @@
       </div>
       <div *ngIf="currentStop.length == 2" class="no-margin bold biggest text animated fadeInLeft">
         <span class="faded">at </span>{{ currentStop[1] }}
+      </div>
+      <div class="padded-top-half">
+        <button ion-button outline small color="light">Change Stop</button>
       </div>
     </div>
 
@@ -46,12 +49,12 @@
   </div>
 
   <!-- Static information -->
-  <div class="padded-top padded-left padded-right bold faded">
+  <div class="padded-top padded-hz bold faded">
     Adults: $2.00<br />
     Children and Students: $1.00<br />
     SuperGold and Children under 5: Free
   </div>
-  <div class="no-margin padded faded">
+  <div class="no-margin padded-top-half padded-hz faded">
     <button ion-button outline small color="light" (click)="showAboutAlert()">
       About
     </button>

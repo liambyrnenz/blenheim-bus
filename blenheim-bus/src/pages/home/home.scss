@@ -24,6 +24,10 @@ page-home {
     font-weight: bold;
   }
 
+  .bump-left {
+    margin-left: -6px;
+  }
+
   .due {
     font-size: 121px;
     line-height: 1;
@@ -41,16 +45,17 @@ page-home {
     padding: 2em;
   }
 
-  .padded-left {
+  .padded-hz {
     padding-left: 2em;
-  }
-
-  .padded-right {
     padding-right: 2em;
   }
 
   .padded-top {
     padding-top: 2em;
+  }
+
+  .padded-top-half {
+    padding-top: 1em;
   }
 
   .route-line {
@@ -68,6 +73,10 @@ page-home {
     * {
       // background-image: none;
       text-align: center;
+    }
+
+    .bump-left {
+      margin-left: initial;
     }
 
   }
