@@ -20,10 +20,10 @@
       <div class="no-margin bold bigger faded text">
         {{ timeAway === "Due" ? "at" : "from" }}
       </div>
-      <div class="no-margin bold biggest text">
+      <div class="no-margin bold biggest text animated fadeInLeft">
         {{ currentStop[0] }} <!-- must be at least one stop line and at most two -->
       </div>
-      <div *ngIf="currentStop.length == 2" class="no-margin bold biggest text">
+      <div *ngIf="currentStop.length == 2" class="no-margin bold biggest text animated fadeInLeft">
         <span class="faded">at </span>{{ currentStop[1] }}
       </div>
     </div>

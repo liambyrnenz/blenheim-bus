@@ -13,6 +13,8 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class LocalDatabaseProvider {
 
+  // TODO: JSON
+
   // min/max start and end times respectively in 24 hour time
   readonly START_TIME = 9;
   readonly END_TIME = 15;
@@ -98,7 +100,10 @@ export class LocalDatabaseProvider {
     console.log(mm);
     if (this.INTERVALS.indexOf(mm) > -1) {
       return this.storage.get(time);
-    }
+    } 
+    // else {
+
+    // }
     return new Promise(resolve => resolve("N/A"));
   }
 

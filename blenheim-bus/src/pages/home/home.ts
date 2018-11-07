@@ -12,13 +12,16 @@ import moment from 'moment';
 })
 export class HomePage {
 
-  time: string = this.getTime();
-  timeAway: string = "Due";
-  currentStop: string[] = [];
+  time: string = this.getTime();  // keep track of current time for updating
+  timeAway: string = "Due";       // time from next stop
+  currentStop: string[] = [];     // current stop (array for multiple lines)
 
   constructor(private database: LocalDatabaseProvider) {
+    // call updates instantly
     this.doUpdates();
 
+    // every second, check the time
+    // if a minute has passed, call updates
     setInterval(() => {
       let t = this.getTime();
       if (this.time != t) {
@@ -51,6 +54,7 @@ export class HomePage {
   /* ====================================================================== */
 
   doUpdates() {
+    if (!this.isInService) return;
     this.database.getNextStop(this.time).then(r => {
       this.currentStop = r.split(" at ");
     });
