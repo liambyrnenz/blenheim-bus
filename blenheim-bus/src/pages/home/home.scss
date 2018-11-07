@@ -4,16 +4,20 @@ page-home {
     color: map-get($colors, light);
   }
 
+  .bg {
+    background-color: map-get($colors, primary);
+    background-image: url(../../assets/imgs/blen1-o10.png);
+    background-position: center;// bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
   .bigger {
     font-size: 24px;
   }
 
   .biggest {
     font-size: 32px;
-  }
-
-  .blue-bg {
-    background-color: map-get($colors, primary);
   }
 
   .bold {
@@ -62,6 +66,7 @@ page-home {
   @media screen and (min-width: 480px) {
     
     * {
+      // background-image: none;
       text-align: center;
     }
 
