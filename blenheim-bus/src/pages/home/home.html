@@ -36,7 +36,9 @@
         right now.
       </div>
       <div class="no-margin bold biggest faded text">
-        Try again later. <!-- TODO try again in... -->
+        Try again at {{ getDay() === "Saturday" ? 
+        getConvertedTime(database.START_TIME + ":00") + " on Monday" : 
+        getConvertedTime(database.START_TIME + ":00") + " tomorrow" }}.
       </div>
     </div>
   </div>

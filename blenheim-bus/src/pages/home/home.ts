@@ -42,6 +42,7 @@ export class HomePage {
   }
 
   /* ========================== INTERNAL GETTERS ========================== */
+  // TODO move to time provider?
 
   getDay() {
     return moment().format("dddd");
@@ -49,6 +50,15 @@ export class HomePage {
 
   getTime() {
     return moment().format("HH:mm");
+  }
+
+  /**
+   * Take a time string in the form HH:mm and return a more convenient form
+   * like ha (i.e. 09:00 to 9am.)
+   * @param time time in string form HH:mm
+   */
+  getConvertedTime(time: string) {
+    return moment(time, "HH:mm").format("ha");
   }
 
   /* ====================================================================== */
