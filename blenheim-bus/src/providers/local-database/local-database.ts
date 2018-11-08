@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class LocalDatabaseProvider {
 
-  // TODO: JSON
+  // TODO: Timetable
 
   // min/max start and end times respectively in 24 hour time
   readonly START_TIME = 9;
@@ -111,14 +111,18 @@ export class LocalDatabaseProvider {
     ints.push(mm);
     ints = ints.sort();
 
+    // get the time that is after the current one when inserted in the array
+    // make it circular and go back to the start if we go past the end
     let idx = ints.indexOf(mm) + 1;
-    if (idx === ints.length - 1) idx = 0;
+    if (idx >= ints.length) idx = 0;
     let next = time.split(":")[0] + ints[idx];
+
     if (idx === 0) {
       let hh1 = (Number(next.split(":")[0]) + 1) + "";
       if (hh1.length == 1) hh1 = "0" + hh1;
       next = hh1 + mm;
     }
+
     return {time: next, stop: this.storage.get(next)};
   }
 

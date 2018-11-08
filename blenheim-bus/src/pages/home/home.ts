@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 import { LocalDatabaseProvider } from '../../providers/local-database/local-database';
 
 import moment from 'moment';
-import { AlertController } from 'ionic-angular';
 
 /**
  * The sole page for the app.
