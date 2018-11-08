@@ -75,6 +75,28 @@ export class HomePage {
     });
   }
 
+  showStopSelect() {
+    let al = this.alert.create();
+    al.setTitle("Select a stop");
+
+    // al.addInput({
+    //   type: 'radio',
+    //   label: 'Blue',
+    //   value: 'blue',
+    //   checked: true
+    // });
+
+    al.addButton('Cancel');
+    al.addButton({
+      text: 'Select',
+      handler: data => {
+        // this.testRadioResult = data;
+      }
+    });
+
+    al.present();
+  }
+
   showAboutAlert() {
     this.alert.create({
       title: "About",

@@ -91,6 +91,12 @@ export class LocalDatabaseProvider {
     console.log("Database filling complete.");
   }
 
+  getAllStops() {
+    this.INTERVALS.forEach(e => {
+
+    });
+  }
+
   /**
    * Determine the next stop the bus will reach. If the time matches exactly one in the
    * database, simply get that stop. Otherwise, figure out the next one it will reach.
