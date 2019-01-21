@@ -1,3 +1,8 @@
+/**
+ * Liam Byrne (liambyrnenz)
+ * BlenheimBus
+ */
+
 import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { LocalDatabaseProvider } from '../../providers/local-database/local-database';
